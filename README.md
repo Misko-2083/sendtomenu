@@ -5,3 +5,5 @@ A Send To Gtk3 menu for the Thunar Custom Action
   Command: tempfile=$(mktemp /tmp/XXXXX); for file in %F; do echo "${file##*/}" >> $tempfile; done; python3 /usr/local/bin/menu.py %d $tempfile    
   File Pattern: *    
   Appearance: *    
+
+Licence GPL v3   
