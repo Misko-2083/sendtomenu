@@ -5,7 +5,7 @@
 #  Setting thunar custom action:
 #  Name: Send to
 #  Description : Copy file(s) and folder(s) to...
-#  Command: tempfile=$(mktemp /tmp/XXXXX); for file in %F; do echo "${file##*/}" >> $tempfile; done; python3 /usr/local/bin/menu.py %d $tempfile
+#  Command: tempfile=$(mktemp /tmp/XXXXX); for file in %F; do echo "${file##*/}" >> $tempfile; done; python3 /usr/local/bin/menu.py %d/ $tempfile
 #  
 #  File Pattern: *
 #  Appearance: *
@@ -63,7 +63,7 @@ class Menu:
            path = path.replace("$HOME", home)
            src = sys.argv[1]
            file_with_list = sys.argv[2]
-           command = "python3 /usr/local/bin/docp.py '%s' '%s/' '%s'" % (src, path, file_with_list)
+           command = "python3 /usr/local/bin/docp.py '%s' '%s' '%s'" % (src, path, file_with_list)
            print(command)
            # fire and forget
            subprocess.Popen(shlex.split(command), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
