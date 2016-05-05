@@ -10,6 +10,6 @@ A Stand-alone Send To Gtk3 menu for the Thunar Custom Action
 ## Author
 * Miloš Pavlović
 
-## License ![License](https://img.shields.io/badge/license-GPLv2-green.svg)
+## License ![License](https://img.shields.io/badge/license-GPLv3-green.svg)
 
-This project is under the GPLv2 license. Unless otherwise stated in individual files
+This project is under the GPLv3 license. Unless otherwise stated in individual files
