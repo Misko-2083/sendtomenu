@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Thunar custom actions launcher for Send to operations
 #  Milos Pavlovic 2016 <mpsrbija@gmail.com>
 #
@@ -60,13 +61,14 @@ class Menu:
         if len(sys.argv) > 1 and  path != '':
            files = "{0}".format(sys.argv[1])
            home = os.path.expanduser("~")
-           path = path.replace("$HOME", home)
+           if "$HOME" in path: 
+               path = path.replace("$HOME", home)
            src = sys.argv[1]
            file_with_list = sys.argv[2]
            command = "python3 /usr/local/bin/docp.py '%s' '%s' '%s'" % (src, path, file_with_list)
-           print(command)
            # fire and forget
-           subprocess.Popen(shlex.split(command), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+           subprocess.Popen(shlex.split(command),
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         else:
            print("No file(s) passed. Exiting.")
         Gtk.main_quit()
@@ -92,7 +94,7 @@ class Menu:
             path = line[2]
 
             box = Gtk.Box()
-            box.set_spacing(10)
+            box.set_spacing(5)
             img = Gtk.Image()
             img.set_from_pixbuf(pixbuf)
             label = Gtk.Label(name)
@@ -104,7 +106,7 @@ class Menu:
             self.menu.append(menuitem)
             j +=1
         height = j*30
-        self.menu.set_size_request(150, height)
+        self.menu.set_size_request(0, height)
         self.menu.popup(None, None, None, None, 0, Gtk.get_current_event_time())
         self.menu.show_all()
 

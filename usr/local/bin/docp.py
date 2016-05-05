@@ -22,10 +22,12 @@ def copy_files(src, path, file_with_list):
 
         print("Copying: " + dst_file_path)
         try:
-            shutil.copytree(src_file_path,dst_file_path)
+            shutil.copytree(src_file_path,dst_file_path,
+                            symlinks=False, ignore=None, copy_function=shutil.copy2,
+                            ignore_dangling_symlinks=False)
         except OSError as e:
             if e.errno == errno.ENOTDIR:
-                shutil.copyfile(src_file_path,dst_file_path)
+                shutil.copy2(src_file_path,dst_file_path,follow_symlinks=True)
             else:
                 print('Directory not copied. Error: %s' % e)
  
