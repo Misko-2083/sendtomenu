@@ -6,7 +6,7 @@
 #  Setting thunar custom action:
 #  Name: Send to
 #  Description : Copy file(s) and folder(s) to...
-#  Command: tempfile=$(mktemp /tmp/XXXXX); for file in %F; do echo "${file##*/}" >> $tempfile; done; python3 /usr/local/bin/menu.py %d/ $tempfile
+#  Command: tempfile=$(mktemp /tmp/XXXXX); for file in %F; do echo "${file##*/}" >> $tempfile; done; python3 /usr/local/bin/menu.py %d/ $tempfile | python3 /usr/local/bin/docp.py; rm -f $tempfile
 #  
 #  File Pattern: *
 #  Appearance: *
@@ -43,8 +43,8 @@ icons=[
 import os
 import sys
 import string
-import subprocess
-import shlex
+from gi import require_version
+require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository.GdkPixbuf import Pixbuf
 
@@ -63,10 +63,10 @@ class Menu:
                path = path.replace("$HOME", home)
            src = sys.argv[1]
            file_with_list = sys.argv[2]
-           command = "python3 /usr/local/bin/docp.py '%s' '%s' '%s'" % (src, path, file_with_list)
-           # fire and forget
-           subprocess.Popen(shlex.split(command),
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+           print(src)
+           print(path)
+           print(file_with_list)
+           sys.stdout.flush()
         else:
            print("No file(s) passed. Exiting.")
         Gtk.main_quit()
@@ -116,4 +116,3 @@ if __name__ == "__main__":
 
      app = Menu()
      app.main()
-
